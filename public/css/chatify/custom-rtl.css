@@ -1,0 +1,215 @@
+/* Custom RTL Dark Theme for Chatify */
+
+/* Setting direction to RTL */
+body, .messenger {
+  direction: rtl;
+  text-align: right;
+}
+
+/* Dark theme colors */
+:root {
+  --custom-dark-bg: #1a1d2a;
+  --custom-darker-bg: #151824;
+  --custom-chat-bg: #1a1d2a;
+  --custom-message-bg: #272e43;
+  --custom-my-message-bg: #2f80ed;
+  --custom-text-color: #fff;
+  --custom-secondary-text: rgba(255, 255, 255, 0.7);
+  --custom-border-color: #272e43;
+  --custom-accent-color: #2f80ed;
+  --custom-hover-bg: #272e43;
+  --custom-avatar-border: #272e43;
+}
+
+/* Main container */
+.messenger {
+  background-color: var(--custom-dark-bg);
+}
+
+/* List view */
+.messenger-listView {
+  background-color: var(--custom-darker-bg);
+  border: none !important;
+}
+
+.messenger-messagingView {
+  background-color: var(--custom-chat-bg);
+  border: none !important;
+}
+
+/* Search input */
+.messenger-search[type="text"] {
+  background-color: var(--custom-message-bg);
+  color: #fff;
+  border-radius: 20px;
+}
+
+/* List items */
+.messenger-list-item {
+  border-bottom: 1px solid var(--custom-border-color);
+}
+
+.messenger-list-item:hover {
+  background-color: var(--custom-hover-bg);
+}
+
+/* Message cards */
+.message-card .message {
+  background-color: var(--custom-message-bg);
+  color: var(--custom-text-color);
+  border-radius: 18px;
+}
+
+.message-card.mc-sender .message {
+  background-color: var(--custom-my-message-bg);
+  color: var(--custom-text-color);
+}
+
+/* Avatar customization */
+.avatar {
+  border: 2px solid var(--custom-avatar-border);
+}
+
+/* Navigation */
+.m-header {
+  background-color: var(--custom-darker-bg) !important;
+}
+
+.m-header-messaging {
+  background-color: var(--custom-darker-bg) !important;
+  box-shadow: none !important;
+}
+
+.m-header-right {
+  float: left !important;
+}
+
+/* Custom user list styles */
+.messenger-listView .messenger-list-item td {
+  padding: 15px;
+}
+
+.messenger-list-item .lastMessageIndicator {
+  color: var(--custom-secondary-text);
+}
+
+/* Message input area */
+.messenger-sendCard {
+  background-color: var(--custom-darker-bg);
+  border: none !important;
+  padding: 10px 0;
+}
+
+.m-send {
+  background-color: var(--custom-message-bg) !important;
+  border-radius: 25px !important;
+  margin: 0 8px;
+  padding: 10px 15px !important;
+}
+
+.messenger-sendCard form {
+  display: flex;
+  align-items: center;
+}
+
+.messenger-sendCard svg {
+  color: var(--custom-text-color);
+}
+
+/* Headers and titles */
+.messenger-title {
+  color: var(--custom-text-color);
+}
+
+.messenger-title > span {
+  background-color: var(--custom-darker-bg);
+}
+
+.messenger-title::before {
+  background-color: var(--custom-border-color);
+}
+
+/* Fix RTL-specific positioning */
+.show-listView {
+  transform: scaleX(-1);
+}
+
+.messenger-messagingView .m-body .messages {
+  padding: 10px 20px;
+}
+
+/* Making message time and status indicators right aligned */
+.message-card.mc-sender {
+  text-align: left !important;
+}
+
+/* Avatar initials style */
+.messenger-list-item .avatar,
+.avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+}
+
+/* Active status styling */
+.activeStatus {
+  bottom: 5px;
+  left: 5px; 
+  right: auto;
+}
+
+/* Online status dot */
+.activeStatus.active {
+  background-color: #4CAF50 !important;
+}
+
+/* Time markers */
+.message-time {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+/* Scrollbar styling */
+.app-scroll::-webkit-scrollbar-thumb {
+  background: #272e43;
+}
+
+.app-scroll::-webkit-scrollbar:hover {
+  background: transparent;
+}
+
+/* Message input area */
+.messenger-sendCard button, 
+.messenger-sendCard label {
+  margin: 0 5px;
+}
+
+/* User online/offline status */
+.user-status {
+  font-size: 12px;
+  color: var(--custom-secondary-text);
+}
+
+/* Contacts sidebar scrollable area */
+.contacts-container {
+  max-height: calc(100% - 120px);
+  overflow-y: auto;
+  margin-top: 40px;
+}
+
+/* User search styling */
+.messenger-search[type="text"]::placeholder {
+  color: var(--custom-secondary-text);
+}
+
+/* Header icons */
+.m-header svg, .m-header-right svg {
+  color: white !important;
+}
+
+/* Message hint styling */
+.message-hint span {
+  background: var(--custom-message-bg);
+  color: var(--custom-secondary-text);
+} 

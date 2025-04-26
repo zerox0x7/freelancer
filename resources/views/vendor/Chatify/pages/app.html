@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>المراسلات - منصة المشاريع المستقلة</title>
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: { primary: "#E7C973", secondary: "" },
+            borderRadius: {
+              none: "0px",
+              sm: "4px",
+              DEFAULT: "8px",
+              md: "12px",
+              lg: "16px",
+              xl: "20px",
+              "2xl": "24px",
+              "3xl": "32px",
+              full: "9999px",
+              button: "8px",
+            },
+          },
+        },
+      };
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Pacifico&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      :where([class^="ri-"])::before { content: "\f3c2"; }
+      @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap');
+      body {
+      font-family: 'Tajawal', sans-serif;
+      background-color: #1a2234;
+      color: #f8fafc;
+      }
+      input:focus, button:focus, textarea:focus {
+      outline: none;
+      }
+      input[type="number"]::-webkit-inner-spin-button,
+      input[type="number"]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+      }
+      .logo {
+      font-family: 'Pacifico', cursive;
+      }
+      .logo-text {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 1.8rem;
+        font-weight: 800;
+        letter-spacing: 1.5px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        color: #e7c973;
+        transition: all 0.3s ease;
+      }
+      .logo-text:hover {
+        transform: scale(1.03);
+        text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4);
+      }
+      .nav-item.active {
+      color: #E7C973;
+      border-bottom: 2px solid #E7C973;
+      }
+      .nav-item {
+      position: relative;
+      }
+      .notification-badge {
+      position: absolute;
+      top: -8px;
+      left: -8px;
+      background-color: #ef4444;
+      color: white;
+      border-radius: 50%;
+      width: 18px;
+      height: 18px;
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      }
+      .chat-bubble {
+      position: relative;
+      max-width: 80%;
+      }
+      .chat-bubble.received {
+      background-color: #242c3d;
+      border-radius: 12px 12px 12px 0;
+      }
+      .chat-bubble.sent {
+      background-color: #0f7c3a;
+      border-radius: 12px 12px 0 12px;
+      align-self: flex-start;
+      }
+      .chat-timestamp {
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.6);
+      }
+      .chat-user-item {
+      transition: all 0.2s ease;
+      }
+      .chat-user-item:hover, .chat-user-item.active {
+      background-color: #242c3d;
+      }
+      .user-list-item {
+      border-bottom: 1px solid #2a334e;
+      }
+      .message-options {
+      visibility: hidden;
+      }
+      .chat-bubble:hover .message-options {
+      visibility: visible;
+      }
+      .user-avatar {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        color: white;
+        text-transform: uppercase;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header Navigation -->
+    <header class="bg-[#1e2538] border-b border-gray-700">
+      <div class="container mx-auto px-4">
+        <div class="flex items-center justify-between h-16">
+          <!-- Logo -->
+          <div class="flex items-center">
+            <a href="index.html" class="flex items-center">
+              <!-- <span class="logo-text">FREELANCERS</span> -->
+              <img src="./freelancers-removebg-preview.png" alt="logo" class="w-40 h-40">
+            </a>
+          </div>
+          <!-- Main Navigation -->
+          <nav class="hidden md:flex space-x-0 gap-6">
+            <a href="#" class="nav-item px-3 py-2 text-sm font-medium relative">
+              البريد
+              <span class="notification-badge">1</span>
+            </a>
+            <a href="message.html" class="nav-item active px-3 py-2 text-sm font-medium relative">
+              المراسلات
+              <span class="notification-badge">2</span>
+            </a>
+            <a href="#" class="nav-item px-3 py-2 text-sm font-medium relative">
+              المسابقات
+              <span class="notification-badge">1</span>
+            </a>
+            <a href="index.html" class="nav-item px-3 py-2 text-sm font-medium relative">
+              الخدمات
+              <span class="notification-badge">5</span>
+            </a>
+          </nav>
+          <!-- Right Side Icons -->
+          <div class="flex items-center space-x-4">
+            <!-- Search Bar -->
+            <div class="relative">
+              <input
+                type="text"
+                placeholder="ابحث عن ..."
+                class="bg-[#242c3d] text-gray-300 text-sm rounded-md px-10 py-2 w-64 border-none"
+              />
+              <div
+                class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none"
+              >
+                <div
+                  class="w-5 h-5 flex items-center justify-center text-gray-400"
+                >
+                  <i class="ri-search-line"></i>
+                </div>
+              </div>
+            </div>
+            <!-- User Menu -->
+            <div class="flex items-center space-x-4">
+              <button
+                class="w-8 h-8 flex items-center justify-center text-gray-300 hover:text-primary"
+              >
+                <i class="ri-mail-line"></i>
+              </button>
+              <button
+                class="w-8 h-8 flex items-center justify-center text-gray-300 hover:text-primary"
+              >
+                <i class="ri-notification-3-line"></i>
+              </button>
+              <button
+                class="w-8 h-8 flex items-center justify-center text-gray-300 hover:text-primary"
+              >
+                <i class="ri-moon-line"></i>
+              </button>
+              <button
+                class="w-8 h-8 flex items-center justify-center text-gray-300 hover:text-primary"
+              >
+                <i class="ri-global-line"></i>
+              </button>
+              <div class="relative">
+                <button
+                  id="userProfileBtn"
+                  class="w-8 h-8 bg-primary rounded-full flex items-center justify-center text-[#1a2234]"
+                >
+                  <i class="ri-user-line"></i>
+                </button>
+                <div
+                  id="userDropdown"
+                  class="absolute left-0 mt-2 w-48 bg-[#242c3d] rounded-lg shadow-lg py-2 hidden z-50"
+                >
+                  <a
+                    href="#"
+                    class="flex items-center px-4 py-2 text-sm text-gray-300 hover:bg-[#2a3347] hover:text-primary"
+                  >
+                    <div class="w-5 h-5 flex items-center justify-center ml-2">
+                      <i class="ri-user-line"></i>
+                    </div>
+                    <span>الملف الشخصي</span>
+                  </a>
+                  <a
+                    href="#"
+                    class="flex items-center px-4 py-2 text-sm text-gray-300 hover:bg-[#2a3347] hover:text-primary"
+                  >
+                    <div class="w-5 h-5 flex items-center justify-center ml-2">
+                      <i class="ri-settings-line"></i>
+                    </div>
+                    <span>إعدادات الحساب</span>
+                  </a>
+                  <a
+                    href="#"
+                    class="flex items-center px-4 py-2 text-sm text-gray-300 hover:bg-[#2a3347] hover:text-primary"
+                  >
+                    <div class="w-5 h-5 flex items-center justify-center ml-2">
+                      <i class="ri-folder-line"></i>
+                    </div>
+                    <span>مشاريعي</span>
+                  </a>
+                  <a
+                    href="#"
+                    class="flex items-center px-4 py-2 text-sm text-gray-300 hover:bg-[#2a3347] hover:text-primary"
+                  >
+                    <div class="w-5 h-5 flex items-center justify-center ml-2">
+                      <i class="ri-file-list-line"></i>
+                    </div>
+                    <span>عروضي</span>
+                  </a>
+                  <a
+                    href="#"
+                    class="flex items-center px-4 py-2 text-sm text-gray-300 hover:bg-[#2a3347] hover:text-primary"
+                  >
+                    <div class="w-5 h-5 flex items-center justify-center ml-2">
+                      <i class="ri-wallet-line"></i>
+                    </div>
+                    <span>المدفوعات</span>
+                  </a>
+                  <a
+                    href="#"
+                    class="flex items-center px-4 py-2 text-sm text-gray-300 hover:bg-[#2a3347] hover:text-primary"
+                  >
+                    <div class="w-5 h-5 flex items-center justify-center ml-2">
+                      <i class="ri-heart-line"></i>
+                    </div>
+                    <span>المفضلة</span>
+                  </a>
+                  <div class="border-t border-gray-700 my-2"></div>
+                  <a
+                    href="#"
+                    class="flex items-center px-4 py-2 text-sm text-red-500 hover:bg-[#2a3347]"
+                  >
+                    <div class="w-5 h-5 flex items-center justify-center ml-2">
+                      <i class="ri-logout-box-line"></i>
+                    </div>
+                    <span>تسجيل الخروج</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-6">
+      <div class="flex flex-col md:flex-row bg-[#1e2538] rounded-lg overflow-hidden shadow-lg min-h-[80vh]">
+        <!-- User List Sidebar -->
+        <div class="w-full md:w-80 bg-[#1e2538] border-l border-gray-700">
+          <!-- Search in Messages -->
+          <div class="p-4 border-b border-gray-700">
+            <div class="relative">
+              <input
+                type="text"
+                placeholder="ابحث في المحادثات..."
+                class="bg-[#242c3d] text-gray-300 text-sm rounded-md px-10 py-2 w-full"
+              />
+              <div
+                class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none"
+              >
+                <div
+                  class="w-5 h-5 flex items-center justify-center text-gray-400"
+                >
+                  <i class="ri-search-line"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- User List -->
+          <div class="overflow-y-auto" style="max-height: calc(80vh - 74px);">
+            <!-- Active User -->
+            <div class="chat-user-item active p-3 user-list-item">
+              <div class="flex items-start">
+                <div class="w-12 h-12 rounded-full ml-3 overflow-hidden">
+                  <img
+                    src="https://readdy.ai/api/search-image?query=middle%20eastern%20professional%20man%20formal%20attire%20headshot&width=50&height=50&seq=1&orientation=squarish"
+                    alt="Mahmoud Tantawy"
+                    class="w-full h-full object-cover"
+                  />
+                </div>
+                <div class="flex-1">
+                  <div class="flex justify-between items-start mb-1">
+                    <h3 class="font-bold text-sm">Mahmoud Tantawy</h3>
+                    <span class="text-xs text-gray-400">منذ 57 دقيقة</span>
+                  </div>
+                  <p class="text-gray-400 text-xs line-clamp-1">هل حضرتك مبرمج تطبيقات سله؟</p>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Other Users -->
+            <div class="chat-user-item p-3 user-list-item">
+              <div class="flex items-start">
+                <div class="w-12 h-12 rounded-full ml-3">
+                  <!-- Default avatar will be generated by JS -->
+                </div>
+                <div class="flex-1">
+                  <div class="flex justify-between items-start mb-1">
+                    <h3 class="font-bold text-sm">Ahmed Ali</h3>
+                    <span class="text-xs text-gray-400">منذ ساعتين</span>
+                  </div>
+                  <p class="text-gray-400 text-xs line-clamp-1">السلام عليكم</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="chat-user-item p-3 user-list-item">
+              <div class="flex items-start">
+                <div class="w-12 h-12 rounded-full ml-3">
+                  <!-- Default avatar will be generated by JS -->
+                </div>
+                <div class="flex-1">
+                  <div class="flex justify-between items-start mb-1">
+                    <h3 class="font-bold text-sm">Waled Abdelrhman</h3>
+                    <span class="text-xs text-gray-400">منذ 3 ساعات</span>
+                  </div>
+                  <p class="text-gray-400 text-xs line-clamp-1">تم</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="chat-user-item p-3 user-list-item">
+              <div class="flex items-start">
+                <div class="w-12 h-12 rounded-full ml-3 overflow-hidden">
+                  <img
+                    src="https://readdy.ai/api/search-image?query=middle%20eastern%20man%20business%20casual%20headshot&width=50&height=50&seq=3&orientation=squarish"
+                    alt="علاء الدين جبرون"
+                    class="w-full h-full object-cover"
+                    data-use-default="true"
+                  />
+                </div>
+                <div class="flex-1">
+                  <div class="flex justify-between items-start mb-1">
+                    <h3 class="font-bold text-sm">علاء الدين جبرون</h3>
+                    <span class="text-xs text-gray-400">منذ 10 ساعات</span>
+                  </div>
+                  <p class="text-gray-400 text-xs line-clamp-1">...m/channel/0029VbAFbTj6hENnKd8ZR</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="chat-user-item p-3 user-list-item">
+              <div class="flex items-start">
+                <div class="w-12 h-12 rounded-full ml-3">
+                  <!-- Default avatar will be generated by JS -->
+                </div>
+                <div class="flex-1">
+                  <div class="flex justify-between items-start mb-1">
+                    <h3 class="font-bold text-sm">احمد محفوظ</h3>
+                    <span class="text-xs text-gray-400">منذ يوم</span>
+                  </div>
+                  <p class="text-gray-400 text-xs line-clamp-1">شكرا</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="chat-user-item p-3 user-list-item">
+              <div class="flex items-start">
+                <div class="w-12 h-12 rounded-full ml-3">
+                  <!-- Default avatar will be generated by JS -->
+                </div>
+                <div class="flex-1">
+                  <div class="flex justify-between items-start mb-1">
+                    <h3 class="font-bold text-sm">احمد الجندي</h3>
+                    <span class="text-xs text-gray-400">منذ يوم</span>
+                  </div>
+                  <p class="text-gray-400 text-xs line-clamp-1">كيف حضرتك</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="chat-user-item p-3 user-list-item">
+              <div class="flex items-start">
+                <div class="w-12 h-12 rounded-full ml-3">
+                  <!-- Default avatar will be generated by JS -->
+                </div>
+                <div class="flex-1">
+                  <div class="flex justify-between items-start mb-1">
+                    <h3 class="font-bold text-sm">Ahmed Mohamed</h3>
+                    <span class="text-xs text-gray-400">منذ يوم</span>
+                  </div>
+                  <p class="text-gray-400 text-xs line-clamp-1">العفو</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="chat-user-item p-3 user-list-item">
+              <div class="flex items-start">
+                <div class="w-12 h-12 rounded-full ml-3">
+                  <!-- Default avatar will be generated by JS -->
+                </div>
+                <div class="flex-1">
+                  <div class="flex justify-between items-start mb-1">
+                    <h3 class="font-bold text-sm">عبدالرزاق المشكيلي</h3>
+                    <span class="text-xs text-gray-400">منذ يوم</span>
+                  </div>
+                  <p class="text-gray-400 text-xs line-clamp-1">ارسل لي رسالة هل تحتاج الى خدمة</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Chat Area -->
+        <div class="flex-1 flex flex-col">
+          <!-- Chat Header -->
+          <div class="p-4 border-b border-gray-700 flex justify-between items-center">
+            <div class="flex items-center">
+              <div class="w-10 h-10 rounded-full ml-3 overflow-hidden">
+                <img
+                  src="https://readdy.ai/api/search-image?query=middle%20eastern%20professional%20man%20formal%20attire%20headshot&width=50&height=50&seq=1&orientation=squarish"
+                  alt="Mahmoud Tantawy"
+                  class="w-full h-full object-cover"
+                  data-use-default="true"
+                />
+              </div>
+              <div>
+                <h3 class="font-bold text-base">Mahmoud Tantawy</h3>
+                <p class="text-xs text-gray-400">متصل الآن</p>
+              </div>
+            </div>
+            <div class="flex items-center space-x-2">
+              <button class="w-8 h-8 flex items-center justify-center text-gray-300 hover:bg-[#242c3d] rounded-full">
+                <i class="ri-more-2-fill"></i>
+              </button>
+              <button class="w-8 h-8 flex items-center justify-center text-gray-300 hover:bg-[#242c3d] rounded-full">
+                <i class="ri-phone-line"></i>
+              </button>
+              <button class="w-8 h-8 flex items-center justify-center text-gray-300 hover:bg-[#242c3d] rounded-full">
+                <i class="ri-vidicon-line"></i>
+              </button>
+            </div>
+          </div>
+          
+          <!-- Chat Messages -->
+          <div class="flex-1 p-4 overflow-y-auto flex flex-col space-y-4" style="max-height: calc(80vh - 140px);">
+            <div class="flex justify-center mb-2">
+              <span class="text-xs text-gray-400 bg-[#242c3d] px-3 py-1 rounded-full">اليوم</span>
+            </div>
+            
+            <!-- Received Message -->
+            <div class="flex items-end gap-2">
+              <div class="w-8 h-8 rounded-full overflow-hidden">
+                <!-- Default avatar will be generated by JS -->
+              </div>
+              <div class="chat-bubble received p-3">
+                <p>السلام عليكم</p>
+                <div class="flex justify-between items-center mt-1">
+                  <span class="chat-timestamp">17:18</span>
+                  <div class="message-options flex space-x-2">
+                    <button class="text-gray-400 hover:text-white text-xs">
+                      <i class="ri-reply-line"></i>
+                    </button>
+                    <button class="text-gray-400 hover:text-white text-xs">
+                      <i class="ri-more-2-fill"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Received Message -->
+            <div class="flex items-end gap-2">
+              <div class="w-8 h-8 rounded-full overflow-hidden">
+                <img
+                  src="https://readdy.ai/api/search-image?query=middle%20eastern%20professional%20man%20formal%20attire%20headshot&width=40&height=40&seq=1&orientation=squarish"
+                  alt="Mahmoud Tantawy"
+                  class="w-full h-full object-cover"
+                  data-use-default="true"
+                />
+              </div>
+              <div class="chat-bubble received p-3">
+                <p>هل حضرتك مبرمج تطبيقات سله؟</p>
+                <div class="flex justify-between items-center mt-1">
+                  <span class="chat-timestamp">17:19</span>
+                  <div class="message-options flex space-x-2">
+                    <button class="text-gray-400 hover:text-white text-xs">
+                      <i class="ri-reply-line"></i>
+                    </button>
+                    <button class="text-gray-400 hover:text-white text-xs">
+                      <i class="ri-more-2-fill"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Typing Indicator -->
+            <div class="flex items-end gap-2">
+              <div class="w-8 h-8 rounded-full overflow-hidden">
+                <img
+                  src="https://readdy.ai/api/search-image?query=middle%20eastern%20professional%20man%20formal%20attire%20headshot&width=40&height=40&seq=1&orientation=squarish"
+                  alt="Mahmoud Tantawy"
+                  class="w-full h-full object-cover"
+                />
+              </div>
+              <div class="chat-bubble received p-3">
+                <div class="flex space-x-1 ml-1">
+                  <div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style="animation-delay: 0s"></div>
+                  <div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style="animation-delay: 0.1s"></div>
+                  <div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style="animation-delay: 0.2s"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Message Input -->
+          <div class="p-4 border-t border-gray-700">
+            <div class="relative flex items-center">
+              <button class="absolute right-3 text-gray-400 hover:text-gray-300">
+                <i class="ri-emotion-line text-xl"></i>
+              </button>
+              <input
+                type="text"
+                placeholder="اكتب رسالتك..."
+                class="bg-[#242c3d] text-gray-300 rounded-lg px-10 py-3 w-full"
+              />
+              <div class="absolute left-2 flex items-center space-x-2">
+                <button class="w-8 h-8 flex items-center justify-center text-gray-400 hover:text-gray-300">
+                  <i class="ri-attachment-2"></i>
+                </button>
+                <button class="w-8 h-8 flex items-center justify-center text-gray-400 hover:text-gray-300">
+                  <i class="ri-mic-line"></i>
+                </button>
+                <button class="w-8 h-8 flex items-center justify-center text-gray-400 hover:text-primary bg-[#1a2234] rounded-full">
+                  <i class="ri-send-plane-fill"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const userProfileBtn = document.getElementById("userProfileBtn");
+        const userDropdown = document.getElementById("userDropdown");
+        
+        // Generate a consistent color based on username
+        function generateColorFromName(name) {
+          let hash = 0;
+          for (let i = 0; i < name.length; i++) {
+            hash = name.charCodeAt(i) + ((hash << 5) - hash);
+          }
+          
+          const colors = [
+            '#4f46e5', // indigo
+            '#0891b2', // cyan
+            '#0d9488', // teal
+            '#4d7c0f', // lime
+            '#9333ea', // purple
+            '#0369a1', // sky
+            '#b45309', // amber
+            '#be123c', // rose
+            '#115e59', // teal dark
+            '#7e22ce', // purple dark
+            '#be185d', // pink
+            '#65a30d'  // lime light
+          ];
+          
+          // Get a positive index
+          const index = Math.abs(hash % colors.length);
+          return colors[index];
+        }
+        
+        // Create default avatars for all users
+        function createDefaultAvatars() {
+          // Handle chat list avatars
+          document.querySelectorAll('.chat-user-item').forEach(item => {
+            const nameElement = item.querySelector('h3');
+            if (!nameElement) return;
+            
+            const name = nameElement.textContent.trim();
+            const avatarContainer = item.querySelector('.w-12.h-12.rounded-full');
+            
+            if (!avatarContainer) return;
+            
+            const imgElement = avatarContainer.querySelector('img');
+            
+            // If there's an image element without data-use-default, keep the image
+            if (imgElement && !imgElement.hasAttribute('data-use-default')) {
+              return;
+            }
+            
+            // Get first two letters of name
+            const initials = name.split(' ')
+              .map(part => part.charAt(0))
+              .join('')
+              .substring(0, 2);
+            
+            // Generate consistent background color
+            const bgColor = generateColorFromName(name);
+            
+            // Clear container and set up avatar
+            avatarContainer.innerHTML = '';
+            avatarContainer.style.backgroundColor = bgColor;
+            
+            // Add initials
+            const avatarText = document.createElement('div');
+            avatarText.className = 'user-avatar';
+            avatarText.textContent = initials;
+            avatarContainer.appendChild(avatarText);
+          });
+          
+          // Handle message avatars
+          document.querySelectorAll('.flex.items-end.gap-2 .w-8.h-8.rounded-full').forEach(container => {
+            const imgElement = container.querySelector('img');
+            
+            // If there's an image element without data-use-default, keep the image
+            if (imgElement && !imgElement.hasAttribute('data-use-default')) {
+              return;
+            }
+            
+            // Assume the chat is with Mahmoud Tantawy (from the active conversation)
+            const name = "Mahmoud Tantawy";
+            
+            // Get first two letters of name
+            const initials = name.split(' ')
+              .map(part => part.charAt(0))
+              .join('')
+              .substring(0, 2);
+            
+            // Generate consistent background color
+            const bgColor = generateColorFromName(name);
+            
+            // Clear container and set up avatar
+            container.innerHTML = '';
+            container.style.backgroundColor = bgColor;
+            
+            // Add initials
+            const avatarText = document.createElement('div');
+            avatarText.className = 'user-avatar';
+            avatarText.textContent = initials;
+            container.appendChild(avatarText);
+          });
+          
+          // Handle chat header avatar
+          const headerAvatar = document.querySelector('.p-4.border-b.border-gray-700 .w-10.h-10.rounded-full');
+          if (headerAvatar) {
+            const imgElement = headerAvatar.querySelector('img');
+            
+            // If there's an image element without data-use-default, keep the image
+            if (imgElement && !imgElement.hasAttribute('data-use-default')) {
+              return;
+            }
+            
+            const name = "Mahmoud Tantawy";
+            
+            // Get first two letters of name
+            const initials = name.split(' ')
+              .map(part => part.charAt(0))
+              .join('')
+              .substring(0, 2);
+            
+            // Generate consistent background color
+            const bgColor = generateColorFromName(name);
+            
+            // Clear container and set up avatar
+            headerAvatar.innerHTML = '';
+            headerAvatar.style.backgroundColor = bgColor;
+            
+            // Add initials
+            const avatarText = document.createElement('div');
+            avatarText.className = 'user-avatar';
+            avatarText.textContent = initials;
+            headerAvatar.appendChild(avatarText);
+          }
+        }
+        
+        // Initialize default avatars when DOM is fully loaded
+        setTimeout(createDefaultAvatars, 0);
+        
+        function toggleUserDropdown(event) {
+          event.stopPropagation();
+          userDropdown.classList.toggle("hidden");
+        }
+        
+        userProfileBtn.addEventListener("click", toggleUserDropdown);
+        
+        document.addEventListener("click", function (event) {
+          if (
+            !userDropdown.contains(event.target) &&
+            !userProfileBtn.contains(event.target)
+          ) {
+            userDropdown.classList.add("hidden");
+          }
+        });
+        
+        // Chat user selection
+        const chatUserItems = document.querySelectorAll(".chat-user-item");
+        chatUserItems.forEach(item => {
+          item.addEventListener("click", function() {
+            chatUserItems.forEach(i => i.classList.remove("active"));
+            this.classList.add("active");
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

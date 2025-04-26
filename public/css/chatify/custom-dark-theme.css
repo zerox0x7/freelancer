@@ -1,0 +1,324 @@
+/* Custom Dark Theme for Chatify - Matching the provided image */
+
+/* Setting the main dark theme variables */
+:root {
+  --dark-primary-bg: #1d2231;  /* Dark blue-gray background */
+  --dark-secondary-bg: #161a27;  /* Darker blue-gray for sidebar */
+  --dark-message-bg: #272b3a;  /* Background for received messages */
+  --dark-my-message-bg: #2a2f3f;  /* Background for sent messages */
+  --dark-text-color: #ffffff;  /* White text */
+  --dark-secondary-text: rgba(255, 255, 255, 0.7);  /* Lighter white for secondary text */
+  --dark-border-color: #2e3447;  /* Border colors */
+  --dark-accent-color: #8a8d95;  /* Accent color for interactive elements */
+  --dark-hover-bg: #272e43;  /* Hover state background */
+  --dark-scrollbar-thumb: #2e3447;  /* Scrollbar color */
+  --dark-avatar-border: #2e3447;  /* Border color for avatars */
+  --dark-message-time: rgba(255, 255, 255, 0.5);  /* Time text color */
+  --dark-input-bg: #272b3a;  /* Input field background */
+}
+
+/* Main messenger container */
+.messenger {
+  background-color: var(--dark-primary-bg);
+  height: 100vh;
+}
+
+/* Left sidebar */
+.messenger-listView {
+  background-color: var(--dark-secondary-bg);
+  border: none !important;
+  min-width: 300px;
+  width: 30%;
+}
+
+/* Chat area */
+.messenger-messagingView {
+  background-color: var(--dark-primary-bg);
+  border: none !important;
+}
+
+/* Header styling */
+.m-header {
+  background-color: var(--dark-secondary-bg) !important;
+  border-bottom: 1px solid var(--dark-border-color);
+}
+
+.m-header-messaging {
+  background-color: var(--dark-primary-bg) !important;
+  box-shadow: none !important;
+  border-bottom: 1px solid var(--dark-border-color);
+}
+
+/* Chat title and header text */
+.m-header a, 
+.m-header a:hover, 
+.m-header a:focus,
+.user-name {
+  color: var(--dark-text-color);
+}
+
+/* Status text */
+.user-status {
+  color: var(--dark-secondary-text);
+  font-size: 12px;
+}
+
+/* Header icons */
+.m-header svg, 
+.m-header-right svg {
+  color: var(--dark-text-color) !important;
+}
+
+/* Avatar styling */
+.avatar {
+  background-color: var(--dark-accent-color) !important;
+  border-radius: 50%;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  color: white !important;
+  font-weight: bold !important;
+  border: none !important;
+  background-image: none !important;
+  text-align: center !important;
+  font-size: 14px !important;
+}
+
+.header-avatar {
+  background-color: var(--dark-accent-color) !important;
+  color: white !important;
+}
+
+/* Avatar sizes */
+.av-l {
+  width: 100px !important;
+  height: 100px !important;
+  font-size: 36px !important;
+}
+
+.av-m {
+  width: 45px !important;
+  height: 45px !important;
+  font-size: 16px !important;
+}
+
+.av-s {
+  width: 32px !important;
+  height: 32px !important;
+  font-size: 12px !important;
+}
+
+/* Special colored avatars for different users - matching the image */
+/* Primary user - purple */
+[data-contact="1"] .avatar, 
+.header-avatar {
+  background-color: #9C27B0 !important;
+}
+
+/* Second user - blue */
+[data-contact="2"] .avatar {
+  background-color: #2196F3 !important;
+}
+
+/* Third user - red */
+[data-contact="3"] .avatar {
+  background-color: #E91E63 !important;
+}
+
+/* Fourth user - green */
+[data-contact="4"] .avatar {
+  background-color: #4CAF50 !important;
+}
+
+/* Fifth user - orange */
+[data-contact="5"] .avatar {
+  background-color: #FF9800 !important;
+}
+
+/* Sixth user - teal */
+[data-contact="6"] .avatar {
+  background-color: #009688 !important;
+}
+
+/* Generic colored avatars for other users */
+.messenger-list-item:nth-child(5n+1) .avatar:not([style*="background-color"]) {
+  background-color: #8e44ad !important;
+}
+
+.messenger-list-item:nth-child(5n+2) .avatar:not([style*="background-color"]) {
+  background-color: #2980b9 !important;
+}
+
+.messenger-list-item:nth-child(5n+3) .avatar:not([style*="background-color"]) {
+  background-color: #e74c3c !important;
+}
+
+.messenger-list-item:nth-child(5n+4) .avatar:not([style*="background-color"]) {
+  background-color: #27ae60 !important;
+}
+
+.messenger-list-item:nth-child(5n+5) .avatar:not([style*="background-color"]) {
+  background-color: #d35400 !important;
+}
+
+/* Search input */
+.messenger-search[type="text"] {
+  background-color: var(--dark-input-bg);
+  color: var(--dark-text-color);
+  border-radius: 20px;
+  padding: 8px 15px;
+}
+
+.messenger-search[type="text"]::placeholder {
+  color: var(--dark-secondary-text);
+}
+
+/* List items in left sidebar */
+.messenger-list-item {
+  padding: 10px 0;
+  border-bottom: 1px solid var(--dark-border-color);
+}
+
+.messenger-list-item:hover {
+  background-color: var(--dark-hover-bg);
+}
+
+.messenger-list-item td p {
+  color: var(--dark-text-color);
+}
+
+.messenger-list-item .lastMessageIndicator {
+  color: var(--dark-secondary-text);
+}
+
+/* Active status dot */
+.activeStatus {
+  background-color: transparent;
+  border: 2px solid var(--dark-avatar-border);
+}
+
+.activeStatus.active {
+  background-color: #4CAF50 !important;
+}
+
+/* Message cards */
+.message-card .message {
+  background-color: var(--dark-message-bg);
+  color: var(--dark-text-color);
+  border-radius: 15px;
+  padding: 10px 15px;
+}
+
+.message-card.mc-sender .message {
+  background-color: var(--dark-my-message-bg);
+}
+
+/* Message timestamps */
+.message-time {
+  color: var(--dark-message-time) !important;
+  font-size: 11px;
+}
+
+/* Message container */
+.messages {
+  padding: 10px 15px;
+}
+
+/* Title styling */
+.messenger-title {
+  color: var(--dark-text-color);
+  margin-top: 15px;
+  margin-bottom: 10px;
+}
+
+.messenger-title > span {
+  background-color: var(--dark-secondary-bg);
+  padding: 0 10px;
+}
+
+.messenger-title::before {
+  background-color: var(--dark-border-color);
+}
+
+/* Message input area */
+.messenger-sendCard {
+  background-color: var(--dark-primary-bg);
+  border-top: 1px solid var(--dark-border-color) !important;
+  padding: 10px;
+}
+
+.messenger-sendCard form {
+  display: flex;
+  align-items: center;
+  background-color: var(--dark-input-bg);
+  border-radius: 25px;
+  padding: 5px 15px;
+}
+
+.m-send {
+  background-color: transparent !important;
+  color: var(--dark-text-color) !important;
+  border: none;
+  padding: 10px !important;
+  max-height: 100px !important;
+}
+
+.messenger-sendCard button, 
+.messenger-sendCard label {
+  background: transparent;
+  color: var(--dark-text-color);
+}
+
+.messenger-sendCard svg {
+  color: var(--dark-secondary-text);
+}
+
+/* Scrollbar styling */
+.app-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+
+.app-scroll::-webkit-scrollbar-thumb {
+  background: var(--dark-scrollbar-thumb);
+  border-radius: 10px;
+}
+
+.app-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Message hint */
+.message-hint span {
+  background: var(--dark-message-bg);
+  color: var(--dark-secondary-text);
+  padding: 8px 15px;
+  border-radius: 15px;
+}
+
+/* Right information view */
+.messenger-infoView {
+  background-color: var(--dark-secondary-bg);
+  border: none !important;
+}
+
+.messenger-infoView > p,
+.messenger-infoView nav > p {
+  color: var(--dark-text-color);
+}
+
+/* Saved messages special styling */
+.saved-messages.avatar {
+  background-color: #9b59b6 !important;
+  color: white !important;
+}
+
+.saved-messages.avatar > span {
+  color: white !important;
+}
+
+/* Media queries for responsive design */
+@media (max-width: 980px) {
+  .messenger-listView {
+    width: 100%;
+  }
+} 
