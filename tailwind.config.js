@@ -11,7 +11,8 @@ module.exports = {
     theme: {
         extend: {
             fontFamily: {
-                sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+                sans: ['Tajawal', ...defaultTheme.fontFamily.sans],
+                tajawal: ['Tajawal', ...defaultTheme.fontFamily.sans],
             },
         },
     },

@@ -87,13 +87,33 @@
         transition: all 0.3s ease;
     }
     
-    .nav-item.active {
-        color: #E7C973;
-        border-bottom: 2px solid #E7C973;
-    }
-    
     .nav-item {
         position: relative;
+        transition: all 0.2s ease;
+    }
+    
+    .nav-item::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background-color: #E7C973;
+        transform: scaleX(0);
+        transition: transform 0.3s ease;
+    }
+    
+    .nav-item:hover::after {
+        transform: scaleX(0.8);
+    }
+    
+    .nav-item.active::after {
+        transform: scaleX(1);
+    }
+    
+    .nav-item.active {
+        color: #E7C973;
     }
     
     .notification-badge {
@@ -109,6 +129,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
     }
     
     .chat-bubble {
@@ -520,109 +541,44 @@
     .chatify-align-items-center {
         align-items: center !important;
     }
+
+    /* User dropdown improvements */
+    #userProfileBtn {
+        transition: all 0.2s ease;
+        box-shadow: 0 2px 5px rgba(231, 201, 115, 0.3);
+    }
+    
+    #userProfileBtn:hover {
+        transform: scale(1.05);
+    }
+    
+    #userDropdown {
+        transform-origin: top right;
+        transition: all 0.2s ease-out;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    }
+    
+    #userDropdown.show {
+        display: block;
+        animation: dropdownFadeIn 0.2s ease-out forwards;
+    }
+    
+    @keyframes dropdownFadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
 </style>
 </head>
 <body>
 
 <!-- Header Navigation -->
-<header class="bg-[#1e2538] border-b border-gray-700">
-    <div class="container mx-auto px-4">
-        <div class="flex items-center justify-between h-16">
-            <!-- Logo -->
-            <div class="flex items-center">
-            <a href="{{ url('/') }}" class="flex items-center">
-              <img src="{{ asset('images/main-logo.png') }}" alt="logo" class="w-40 h-40">
-            </a>
-            </div>
-            
-            <!-- Main Navigation -->
-            <nav class="hidden md:flex space-x-0 gap-6">
-                <a href="#" class="nav-item px-3 py-2 text-sm font-medium relative">
-                    البريد
-                    <span class="notification-badge">1</span>
-                </a>
-                <a href="#" class="nav-item active px-3 py-2 text-sm font-medium relative">
-                    المراسلات
-                    <span class="notification-badge">2</span>
-                </a>
-                <a href="#" class="nav-item px-3 py-2 text-sm font-medium relative">
-                    المسابقات
-                    <span class="notification-badge">1</span>
-                </a>
-                <a href="/" class="nav-item px-3 py-2 text-sm font-medium relative">
-                    الخدمات
-                    <span class="notification-badge">5</span>
-                </a>
-            </nav>
-            
-            <!-- User Menu -->
-            <div class="flex items-center space-x-4">
-                <div class="relative">
-                    <input
-                        type="text"
-                        placeholder="ابحث عن ..."
-                        class="bg-[#242c3d] text-gray-300 text-sm rounded-md px-10 py-2 w-64 border-none"
-                    />
-                    <div
-                        class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none"
-                    >
-                        <div
-                            class="w-5 h-5 flex items-center justify-center text-gray-400"
-                        >
-                            <i class="ri-search-line"></i>
-                        </div>
-                    </div>
-                </div>
-                <button
-                    class="w-8 h-8 flex items-center justify-center text-gray-300 hover:text-primary"
-                >
-                    <i class="ri-notification-3-line"></i>
-                </button>
-                <div class="relative">
-                    <button
-                        id="userProfileBtn"
-                        class="w-8 h-8 bg-primary rounded-full flex items-center justify-center text-[#1a2234]"
-                    >
-                        <i class="ri-user-line"></i>
-                    </button>
-                    <div
-                        id="userDropdown"
-                        class="absolute left-0 mt-2 w-48 bg-[#242c3d] rounded-lg shadow-lg py-2 hidden z-50"
-                    >
-                        <a
-                            href="#"
-                            class="flex items-center px-4 py-2 text-sm text-gray-300 hover:bg-[#2a3347] hover:text-primary"
-                        >
-                            <div class="w-5 h-5 flex items-center justify-center ml-2">
-                                <i class="ri-user-line"></i>
-                            </div>
-                            <span>الملف الشخصي</span>
-                        </a>
-                        <a
-                            href="#"
-                            class="flex items-center px-4 py-2 text-sm text-gray-300 hover:bg-[#2a3347] hover:text-primary"
-                        >
-                            <div class="w-5 h-5 flex items-center justify-center ml-2">
-                                <i class="ri-settings-line"></i>
-                            </div>
-                            <span>إعدادات الحساب</span>
-                        </a>
-                        <div class="border-t border-gray-700 my-2"></div>
-                        <a
-                            href="#"
-                            class="flex items-center px-4 py-2 text-sm text-red-500 hover:bg-[#2a3347]"
-                        >
-                            <div class="w-5 h-5 flex items-center justify-center ml-2">
-                                <i class="ri-logout-box-line"></i>
-                            </div>
-                            <span>تسجيل الخروج</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</header>
+@include('layouts.parts.header');
 
 <main class="container mx-auto px-4 py-6">
     <div class="messenger">
@@ -766,10 +722,28 @@
 <script src="{{ asset('js/chatify/rtl-fixes.js') }}"></script>
 
 <script>
-  const messagingView = document.querySelector('.messenger-messagingView');
+  // User dropdown toggle functionality
+  document.addEventListener('DOMContentLoaded', function() {
+    const userProfileBtn = document.getElementById('userProfileBtn');
+    const userDropdown = document.getElementById('userDropdown');
+    
+    userProfileBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      userDropdown.classList.toggle('show');
+    });
+    
+    // Close dropdown when clicking outside
+    document.addEventListener('click', function(e) {
+      if (!userDropdown.contains(e.target) && e.target !== userProfileBtn) {
+        userDropdown.classList.remove('show');
+      }
+    });
+    
+    const messagingView = document.querySelector('.messenger-messagingView');
     if (messagingView) {
         messagingView.style.maxHeight = '650px';
     }
+  });
 </script>
 
 </body>
