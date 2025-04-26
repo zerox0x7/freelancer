@@ -396,14 +396,21 @@ function IDinfo(id) {
           NProgress.remove();
           return;
         }
+
+        // testing1
+        // New code using <img> tags
+$(".messenger-infoView").find(".avatar").attr("src", data.user_avatar);
+$(".header-avatar").attr("src", data.user_avatar);
+
+
         // avatar photo
-        $(".messenger-infoView")
-          .find(".avatar")
-          .css("background-image", 'url("' + data.user_avatar + '")');
-        $(".header-avatar").css(
-          "background-image",
-          'url("' + data.user_avatar + '")'
-        );
+        // $(".messenger-infoView")
+        //   .find(".avatar")
+        //   .css("background-image", 'url("' + data.user_avatar + '")');
+        // $(".header-avatar").css(
+        //   "background-image",
+        //   'url("' + data.user_avatar + '")'
+        // );
         // Show shared and actions
         $(".messenger-infoView-btns .delete-conversation").show();
         $(".messenger-infoView-shared").show();

@@ -45,6 +45,11 @@ Route::middleware(['auth'])->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     
+    // Profile avatar with Braze integration
+    Route::get('/profile/avatar', function() {
+        return view('profile.avatar');
+    })->name('profile.avatar');
+    
     // Account settings
     Route::get('/account/settings', [AccountController::class, 'settings'])->name('account.settings');
     

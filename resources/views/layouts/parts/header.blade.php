@@ -73,20 +73,32 @@
               <div class="relative">
                 <button
                   id="userProfileBtn"
-                  class="w-8 h-8 bg-primary rounded-full flex items-center justify-center text-[#1a2234]"
+                  class="w-8 h-8 bg-primary rounded-full flex items-center justify-center text-[#1a2234] overflow-hidden"
                 >
-                  <i class="ri-user-line"></i>
+                  @if(Auth::check() && Auth::user()->avatar)
+                    <img src="{{ asset('storage/' . config('chatify.user_avatar.folder') . '/' . Auth::user()->avatar) }}" 
+                         alt="{{ Auth::user()->name }}" 
+                         class="w-full h-full object-cover">
+                  @else
+                    {{ Auth::check() ? substr(Auth::user()->name, 0, 2) : '' }}
+                  @endif
                 </button>
                 <div
                   id="userDropdown"
                   class="absolute left-0 mt-2 w-48 bg-[#242c3d] rounded-lg shadow-lg py-2 hidden z-50"
                 >
                   <a
-                    href="#"
+                    href="{{ route('profile.avatar') }}"
                     class="flex items-center px-4 py-2 text-sm text-gray-300 hover:bg-[#2a3347] hover:text-primary"
                   >
-                    <div class="w-5 h-5 flex items-center justify-center ml-2">
-                      <i class="ri-user-line"></i>
+                    <div class="w-5 h-5 flex items-center justify-center ml-2 overflow-hidden rounded-full">
+                      @if(Auth::check() && Auth::user()->avatar)
+                        <img src="{{ asset('storage/' . config('chatify.user_avatar.folder') . '/' . Auth::user()->avatar) }}" 
+                             alt="{{ Auth::user()->name }}" 
+                             class="w-full h-full object-cover">
+                      @else
+                        {{ Auth::check() ? substr(Auth::user()->name, 0, 2) : '' }}
+                      @endif
                     </div>
                     <span>الملف الشخصي</span>
                   </a>

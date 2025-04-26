@@ -12,8 +12,10 @@ $lastMessageBody = strlen($lastMessageBody) > 30 ? mb_substr($lastMessageBody, 0
                 <span class="activeStatus active"></span>
             @endif
         <div class="avatar av-m"
-        style="background-image: url('{{ $user->avatar }}');">
-            @if(!$user->avatar)
+        style="background-image: url('{{ asset('storage/' . config('chatify.user_avatar.folder') . '/' . $user->avatar) }}');">
+           
+        <img src="{{ $user->avatar }}" style="position:absolute; width:80%; hight:80%; border-radius: 50%;" >
+        @if($user->avatar == 'avatar.png')
                 {{ substr($user->name, 0, 2) }}
             @endif
         </div>

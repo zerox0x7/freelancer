@@ -639,8 +639,10 @@
                     {{-- header back button, avatar and user name --}}
                     <div class="chatify-d-flex chatify-justify-content-between chatify-align-items-center">
                         <a href="#" class="show-listView"><i class="fas fa-arrow-left"></i></a>
-                        <div class="avatar av-s header-avatar" style="margin: 0px 10px; margin-top: -5px; margin-bottom: -5px;">
-                        </div>
+                        <!-- <img class="avatar" alt="User Avatar" style="width: 40px; height: 40px; border-radius: 50%;" /> -->
+<img class="header-avatar" alt="Header Avatar" style="width: 40px; height: 40px; border-radius: 50%; margin-left: 10px;" />
+                        <!-- <div class="avatar av-s header-avatar" style="margin: 0px 10px; margin-top: -5px; margin-bottom: -5px;">
+                        </div> -->
                         <div>
                             <a href="#" class="user-name">{{ config('chatify.name') }}</a>
                             <p class="user-status">متصل الآن</p>

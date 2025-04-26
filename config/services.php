@@ -30,5 +30,10 @@ return [
         'secret' => env('AWS_SECRET_ACCESS_KEY'),
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
+    
+    'braze' => [
+        'api_key' => env('BRAZE_API_KEY'),
+        'endpoint' => env('BRAZE_API_ENDPOINT', 'https://rest.iad-01.braze.com'),
+    ],
 
 ];
