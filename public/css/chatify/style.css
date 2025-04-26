@@ -590,8 +590,9 @@ body {
   max-height: 200px;
 }
 .attachment-preview {
-  position: relative;
-  padding: 10px;
+  position: absolute;
+  padding: 6px;
+  top: -176px;
 }
 
 .attachment-preview > p {
